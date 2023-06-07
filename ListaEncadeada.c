@@ -32,29 +32,35 @@ void adicionarJogador(char* nome, int numero){
 }
 
 void listarJogador(Jogador *aux){
-    printf("O nome do jogador e: %s e o numero dele e: %i\n", aux->nome, aux->numero);
-    if(aux->prox != NULL){
-        aux = aux->prox;
-        listarJogador(aux);
+    if(aux!=NULL){
+        printf("O nome do jogador e: %s e o numero dele e: %i\n", aux->nome, aux->numero);
+        if(aux->prox != NULL){
+            aux = aux->prox;
+            listarJogador(aux);
+        }
+    }else{
+        printf("A lista esta vazia");
     }
 }
 
 void removerJogador(char* jogador){
     Jogador* lixo = NULL;
-    if(inicio->nome == jogador){
-        lixo = inicio;
-        inicio = inicio->prox;
-        free(lixo);
-    }
-    else{
-        Jogador* aux = inicio ->prox;
-        while(aux->prox != NULL){
-            if(aux->prox->nome == jogador){
-                Jogador* atual = aux ->prox;
-                aux->prox = aux->prox->prox;
-                free(atual);
-            }else{
-                aux = aux->prox;
+    if(inicio!=NULL){
+        if(inicio->nome == jogador){
+            lixo = inicio;
+            inicio = inicio->prox;
+            free(lixo);
+        }
+        else{
+            Jogador* aux = inicio ->prox;
+            while(aux->prox != NULL){
+                if(aux->prox->nome == jogador){
+                    lixo = aux ->prox;
+                    aux->prox = aux->prox->prox;
+                    free(lixo);
+                }else{
+                    aux = aux->prox;
+                }
             }
         }
     }
